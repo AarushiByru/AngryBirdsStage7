@@ -1,5 +1,28 @@
+//Examples on array
+
+//an array holding same data type
+var arr1 = ["a","b","c","d","e"];
+console.log(arr1);
+
+//an array with different data types
+var arr2 = ["name", 12, true];
+console.log(arr2);
+
+//an array storing a list of arrays
+var arr3 = [[1,2],[2,3,5],[12,16]];
+console.log(arr3[1][0]);
+console.log(arr3[2][1]);
+
+arr3.push("my name");
+console.log(arr3)
+
+arr3.pop(arr3);
+console.log(arr3);
+
+
+
 const Engine = Matter.Engine;
-const World= Matter.World;
+const World= Matter.World; 
 const Bodies = Matter.Bodies;
 const Constraint = Matter.Constraint;
 
@@ -8,6 +31,7 @@ var box1, pig1,pig3;
 var backgroundImg,platform;
 var bird, slingshot;
 
+var gameState = "onsling";
 
 function preload() {
     backgroundImg = loadImage("sprites/bg.png");
@@ -69,16 +93,21 @@ function draw(){
 }
 
 function mouseDragged(){
-    Matter.Body.setPosition(bird.body, {x: mouseX , y: mouseY});
+    if(gameState === "onsling"){
+        Matter.Body.setPosition(bird.body, {x: mouseX , y: mouseY});
+    }  
 }
+    
 
 
 function mouseReleased(){
     slingshot.fly();
+    gameState = "launched";
+
 }
 
 function keyPressed(){
     if(keyCode === 32){
-        slingshot.attach(bird.body);
+        //slingshot.attach(bird.body);
     }
 }
